@@ -1,0 +1,505 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Paul Glosemeyer — AI Engineering Portfolio</title>
+<meta name="description" content="Paul Glosemeyer — von Echtzeit-Systemen in Unity zu KI Engineering. Projekte, Skills, Kontakt.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ink:#0F1B2E;
+    --ink-2:#16273D;
+    --line:#2A3B52;
+    --paper:#F4F5F2;
+    --paper-2:#E8E9E4;
+    --text:#12181F;
+    --muted:#5C6672;
+    --muted-on-ink:#8FA0B5;
+    --signal:#E8A33D;
+    --signal-dim:#B8802E;
+  }
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    margin:0;
+    background:var(--ink);
+    color:var(--paper);
+    font-family:'IBM Plex Sans',sans-serif;
+    line-height:1.5;
+  }
+  ::selection{background:var(--signal);color:var(--ink);}
+
+  a{color:inherit;}
+
+  .wrap{
+    max-width:960px;
+    margin:0 auto;
+    padding:0 32px;
+  }
+
+  h1,h2,h3{
+    font-family:'Space Grotesk',sans-serif;
+    font-weight:600;
+    margin:0;
+    letter-spacing:-0.01em;
+  }
+
+  .mono{
+    font-family:'IBM Plex Mono',monospace;
+  }
+
+  /* ---------- NAV ---------- */
+  nav{
+    position:sticky;
+    top:0;
+    z-index:10;
+    background:rgba(15,27,46,0.92);
+    backdrop-filter:blur(6px);
+    border-bottom:1px solid var(--line);
+  }
+  nav .wrap{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    height:56px;
+  }
+  .nav-name{
+    font-family:'Space Grotesk',sans-serif;
+    font-weight:600;
+    font-size:15px;
+  }
+  .nav-links{
+    display:flex;
+    gap:28px;
+    font-size:14px;
+    color:var(--muted-on-ink);
+  }
+  .nav-links a{text-decoration:none;}
+  .nav-links a:hover{color:var(--paper);}
+
+  /* ---------- HERO ---------- */
+  header.hero{
+    padding:96px 0 72px;
+    border-bottom:1px solid var(--line);
+    position:relative;
+    overflow:hidden;
+  }
+  .hero-grid{
+    display:grid;
+    grid-template-columns:1fr 220px;
+    gap:48px;
+    align-items:start;
+  }
+  .hero-kicker{
+    font-family:'IBM Plex Mono',monospace;
+    font-size:13px;
+    color:var(--signal);
+    margin-bottom:18px;
+  }
+  h1.hero-title{
+    font-size:clamp(36px,5vw,54px);
+    line-height:1.08;
+    max-width:640px;
+  }
+  .hero-sub{
+    margin-top:22px;
+    font-size:17px;
+    color:var(--muted-on-ink);
+    max-width:520px;
+  }
+  .hero-links{
+    margin-top:32px;
+    display:flex;
+    gap:20px;
+    font-size:14px;
+  }
+  .hero-links a{
+    text-decoration:none;
+    border-bottom:1px solid var(--line);
+    padding-bottom:2px;
+  }
+  .hero-links a:hover{border-color:var(--signal);color:var(--signal);}
+
+  .scan{
+    width:100%;
+    aspect-ratio:1/1;
+    border:1px solid var(--line);
+    position:relative;
+    overflow:hidden;
+  }
+  .scan svg{width:100%;height:100%;display:block;}
+  .scan-line{
+    stroke:var(--signal);
+    stroke-width:1;
+    opacity:0.9;
+  }
+  .scan-sweep{
+    position:absolute;
+    left:0;right:0;
+    height:2px;
+    background:linear-gradient(90deg,transparent,var(--signal),transparent);
+    top:0;
+    animation:sweep 3.2s ease-in-out 0.4s 1;
+  }
+  @keyframes sweep{
+    0%{top:2%;opacity:0;}
+    10%{opacity:1;}
+    90%{opacity:1;}
+    100%{top:96%;opacity:0;}
+  }
+  @media (prefers-reduced-motion: reduce){
+    .scan-sweep{animation:none;display:none;}
+  }
+
+  /* ---------- SECTION LABELS ---------- */
+  .section{
+    padding:72px 0;
+    border-bottom:1px solid var(--line);
+  }
+  .section-head{
+    display:grid;
+    grid-template-columns:140px 1fr;
+    gap:24px;
+    margin-bottom:40px;
+  }
+  .section-index{
+    font-family:'IBM Plex Mono',monospace;
+    font-size:13px;
+    color:var(--muted-on-ink);
+    padding-top:6px;
+  }
+  .section-head h2{
+    font-size:28px;
+  }
+  .section-body{
+    display:grid;
+    grid-template-columns:140px 1fr;
+    gap:24px;
+  }
+  .section-body > .lede{grid-column:2;}
+
+  /* ---------- ABOUT ---------- */
+  .about-text{
+    font-size:16px;
+    color:var(--paper);
+    max-width:640px;
+  }
+  .about-text p{margin:0 0 16px;}
+  .about-text p:last-child{margin-bottom:0;}
+  .about-text .muted{color:var(--muted-on-ink);}
+
+  /* ---------- PROJECTS ---------- */
+  .project-registry{
+    grid-column:2;
+    border-top:1px solid var(--line);
+  }
+  .project-row{
+    display:grid;
+    grid-template-columns:1fr auto auto;
+    gap:24px;
+    align-items:baseline;
+    padding:22px 0;
+    border-bottom:1px solid var(--line);
+    text-decoration:none;
+    color:inherit;
+  }
+  .project-row:hover .project-name{color:var(--signal);}
+  .project-main{}
+  .project-name{
+    font-family:'Space Grotesk',sans-serif;
+    font-weight:600;
+    font-size:18px;
+    transition:color .15s ease;
+  }
+  .project-desc{
+    margin-top:6px;
+    font-size:14.5px;
+    color:var(--muted-on-ink);
+    max-width:460px;
+  }
+  .project-stack{
+    font-family:'IBM Plex Mono',monospace;
+    font-size:12px;
+    color:var(--muted-on-ink);
+    white-space:nowrap;
+    text-align:right;
+  }
+  .status{
+    font-family:'IBM Plex Mono',monospace;
+    font-size:11px;
+    padding:4px 9px;
+    border:1px solid var(--line);
+    white-space:nowrap;
+    height:fit-content;
+  }
+  .status.live{color:var(--signal);border-color:var(--signal-dim);}
+  .status.progress{color:var(--muted-on-ink);}
+  .status.planned{color:var(--muted-on-ink);opacity:0.6;}
+
+  /* ---------- SKILLS ---------- */
+  .skill-groups{
+    grid-column:2;
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:32px 48px;
+  }
+  .skill-group h3{
+    font-size:14px;
+    font-family:'IBM Plex Mono',monospace;
+    font-weight:400;
+    color:var(--signal);
+    margin-bottom:14px;
+  }
+  .tag-row{
+    display:flex;
+    flex-wrap:wrap;
+    gap:8px;
+  }
+  .tag{
+    font-size:13px;
+    padding:6px 12px;
+    border:1px solid var(--line);
+    color:var(--paper);
+  }
+
+  /* ---------- CONTACT ---------- */
+  footer.section{border-bottom:none;padding-bottom:96px;}
+  .contact-body{
+    grid-column:2;
+  }
+  .contact-body p{
+    font-size:16px;
+    color:var(--muted-on-ink);
+    max-width:480px;
+    margin:0 0 24px;
+  }
+  .contact-links{
+    display:flex;
+    gap:28px;
+    flex-wrap:wrap;
+  }
+  .contact-links a{
+    text-decoration:none;
+    font-size:15px;
+    border-bottom:1px solid var(--line);
+    padding-bottom:2px;
+  }
+  .contact-links a:hover{border-color:var(--signal);color:var(--signal);}
+
+  @media (max-width:720px){
+    .hero-grid{grid-template-columns:1fr;}
+    .scan{max-width:220px;}
+    .section-head,.section-body{grid-template-columns:1fr;}
+    .section-index{padding-top:0;}
+    .project-row{grid-template-columns:1fr;gap:8px;}
+    .project-stack{text-align:left;}
+    .skill-groups{grid-template-columns:1fr;}
+    .nav-links{gap:16px;font-size:13px;}
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="wrap">
+    <div class="nav-name">Paul Glosemeyer</div>
+    <div class="nav-links">
+      <a href="#about">About</a>
+      <a href="#projects">Projects</a>
+      <a href="#skills">Skills</a>
+      <a href="#contact">Contact</a>
+    </div>
+  </div>
+</nav>
+
+<header class="hero">
+  <div class="wrap">
+    <div class="hero-grid">
+      <div>
+        <div class="hero-kicker">AI ENGINEERING — PORTFOLIO</div>
+        <h1 class="hero-title">Vier Jahre Echtzeit-Systeme in Unity gebaut. Jetzt geht's Richtung KI Engineering.</h1>
+        <p class="hero-sub">
+          Ich studiere KI-Science im Master und baue nebenbei die Projekte, die zeigen, dass ich
+          KI-Systeme nicht nur verstehe, sondern zum Laufen bringe — von Retrieval-Systemen
+          bis zu Computer-Vision-Tools.
+        </p>
+        <div class="hero-links">
+          <a href="#projects">Projekte ansehen</a>
+          <a href="https://github.com/" target="_blank" rel="noopener">GitHub</a>
+          <a href="https://paul-glosemeyer.de" target="_blank" rel="noopener">Game Dev Portfolio</a>
+        </div>
+      </div>
+      <div class="scan">
+        <svg viewBox="0 0 220 220" xmlns="http://www.w3.org/2000/svg">
+          <line class="scan-line" x1="20" y1="20" x2="200" y2="20"/>
+          <line class="scan-line" x1="20" y1="20" x2="20" y2="200"/>
+          <circle class="scan-line" cx="110" cy="110" r="60" fill="none"/>
+          <circle class="scan-line" cx="110" cy="110" r="30" fill="none" opacity="0.5"/>
+          <line class="scan-line" x1="110" y1="20" x2="110" y2="200" opacity="0.35"/>
+          <line class="scan-line" x1="20" y1="110" x2="200" y2="110" opacity="0.35"/>
+          <circle cx="110" cy="110" r="3" fill="#E8A33D"/>
+        </svg>
+        <div class="scan-sweep"></div>
+      </div>
+    </div>
+  </div>
+</header>
+
+<section class="section" id="about">
+  <div class="wrap">
+    <div class="section-head">
+      <div class="section-index">01 — ABOUT</div>
+      <h2>Vom Game-Dev zum KI-Engineer</h2>
+    </div>
+    <div class="section-body">
+      <div></div>
+      <div class="about-text lede">
+        <p>
+          Seit vier Jahren entwickle ich mit Unity — zuletzt als Gründer von Void Shifter,
+          wo ich das Roguelike <strong>Void Reaper</strong> gebaut habe. Parallel studiere ich
+          KI-Science im Master und verschiebe meinen Fokus Richtung KI Engineering:
+          Systeme bauen, die LLMs, Retrieval und Computer Vision produktiv einsetzen.
+        </p>
+        <p class="muted">
+          Was aus der Game-Entwicklung bleibt: der Anspruch, dass Dinge tatsächlich laufen,
+          nicht nur in der Theorie funktionieren — jedes Projekt hier wurde live getestet
+          und iterativ debuggt, nicht nur einmal geschrieben und abgehakt.
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section" id="projects">
+  <div class="wrap">
+    <div class="section-head">
+      <div class="section-index">02 — PROJECTS</div>
+      <h2>Was ich gebaut habe</h2>
+    </div>
+    <div class="section-body">
+      <div></div>
+      <div class="project-registry">
+
+        <a class="project-row" href="#" target="_blank" rel="noopener">
+          <div class="project-main">
+            <div class="project-name">Vision-based Game State Detector</div>
+            <div class="project-desc">
+              Erkennt per Screen-Capture + Template Matching einen Spielzustand in Echtzeit
+              und blendet ein Overlay ein — inkl. Umgang mit transparenten UI-Ebenen und
+              visuell fast identischen Icon-Varianten.
+            </div>
+          </div>
+          <div class="project-stack">Python · OpenCV<br>Win32 API</div>
+          <div class="status live">SHIPPED</div>
+        </a>
+
+        <a class="project-row" href="#" target="_blank" rel="noopener">
+          <div class="project-main">
+            <div class="project-name">RAG-Dokumentenassistent</div>
+            <div class="project-desc">
+              Chatbot, der Fragen zu einer eigenen Dokumentensammlung anhand von
+              Embeddings + Vector-Search beantwortet, statt nur aus Trainingswissen zu raten.
+            </div>
+          </div>
+          <div class="project-stack">Python · FastAPI<br>Chroma · LLM API</div>
+          <div class="status progress">IN PROGRESS</div>
+        </a>
+
+        <a class="project-row" href="#" target="_blank" rel="noopener">
+          <div class="project-main">
+            <div class="project-name">Agentisches Tool-System</div>
+            <div class="project-desc">
+              Ein Agent, der mehrstufige Aufgaben löst, indem er selbstständig entscheidet,
+              welche Tools er in welcher Reihenfolge einsetzt.
+            </div>
+          </div>
+          <div class="project-stack">Python · LangChain</div>
+          <div class="status planned">GEPLANT</div>
+        </a>
+
+        <a class="project-row" href="#" target="_blank" rel="noopener">
+          <div class="project-main">
+            <div class="project-name">KI-Agent in Unity</div>
+            <div class="project-desc">
+              LLM-gesteuertes NPC-Verhalten bzw. RL-Agent in einer Unity-Simulation —
+              die Verbindung aus Game-Dev-Hintergrund und KI Engineering.
+            </div>
+          </div>
+          <div class="project-stack">Unity · C# · Python</div>
+          <div class="status planned">GEPLANT</div>
+        </a>
+
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section" id="skills">
+  <div class="wrap">
+    <div class="section-head">
+      <div class="section-index">03 — SKILLS</div>
+      <h2>Werkzeuge & Grundlagen</h2>
+    </div>
+    <div class="skill-groups">
+      <div class="skill-group">
+        <h3>KI / ML</h3>
+        <div class="tag-row">
+          <span class="tag">LLM-APIs</span>
+          <span class="tag">Prompt Engineering</span>
+          <span class="tag">Embeddings</span>
+          <span class="tag">Vector Databases</span>
+          <span class="tag">RAG</span>
+        </div>
+      </div>
+      <div class="skill-group">
+        <h3>Engineering</h3>
+        <div class="tag-row">
+          <span class="tag">Python</span>
+          <span class="tag">FastAPI</span>
+          <span class="tag">OpenCV</span>
+          <span class="tag">Docker</span>
+          <span class="tag">Git</span>
+        </div>
+      </div>
+      <div class="skill-group">
+        <h3>Game Development</h3>
+        <div class="tag-row">
+          <span class="tag">Unity</span>
+          <span class="tag">C#</span>
+          <span class="tag">Gameplay Systems</span>
+        </div>
+      </div>
+      <div class="skill-group">
+        <h3>Sonstiges</h3>
+        <div class="tag-row">
+          <span class="tag">Deutsch (Muttersprache)</span>
+          <span class="tag">Englisch</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer class="section" id="contact">
+  <div class="wrap">
+    <div class="section-head">
+      <div class="section-index">04 — CONTACT</div>
+      <h2>Reden wir</h2>
+    </div>
+    <div class="contact-body">
+      <p>Offen für Werkstudenten-, Praktikums- oder Junior-Stellen im KI-Engineering-Bereich.</p>
+      <div class="contact-links">
+        <a href="mailto:deine@email.de">deine@email.de</a>
+        <a href="https://github.com/" target="_blank" rel="noopener">GitHub</a>
+        <a href="https://de.linkedin.com/in/paul-glosemeyer-51a4a81ba" target="_blank" rel="noopener">LinkedIn</a>
+        <a href="https://paul-glosemeyer.de" target="_blank" rel="noopener">paul-glosemeyer.de</a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>
