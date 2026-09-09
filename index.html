@@ -20,6 +20,8 @@
     --muted-on-ink:#8FA0B5;
     --signal:#E8A33D;
     --signal-dim:#B8802E;
+    --green:#4CC38A;
+    --green-dim:#2F8F63;
   }
   *{box-sizing:border-box;}
   html{scroll-behavior:smooth;}
@@ -235,7 +237,7 @@
     white-space:nowrap;
     height:fit-content;
   }
-  .status.live{color:var(--signal);border-color:var(--signal-dim);}
+  .status.ready{color:var(--green);border-color:var(--green-dim);}
   .status.progress{color:var(--muted-on-ink);}
   .status.planned{color:var(--muted-on-ink);opacity:0.6;}
 
@@ -385,15 +387,13 @@
           <div class="project-main">
             <div class="project-name">RAG-Dokumentenassistent</div>
             <div class="project-desc">
-              Web-App mit FastAPI-Backend und React-Frontend: PDFs werden per Drag &amp; Drop
-              hochgeladen, im Hintergrund in Chunks zerlegt und per OpenAI-Embeddings in
-              ChromaDB indexiert — inklusive Live-Fortschrittsanzeige. Ein Chat beantwortet
-              Fragen anschließend ausschließlich anhand der gefundenen Textstellen (RAG),
-              statt aus allgemeinem Trainingswissen zu raten.
+              Web-App mit FastAPI-Backend und React-Frontend. PDFs werden per Drag &amp; Drop
+              hochgeladen, in Chunks zerlegt und per OpenAI-Embeddings in ChromaDB indexiert.
+              Ein Chat beantwortet Fragen danach nur anhand der gefundenen Textstellen (RAG).
             </div>
           </div>
           <div class="project-stack">Python · FastAPI · React<br>ChromaDB · OpenAI API</div>
-          <div class="status live">SHIPPED</div>
+          <div class="status ready">READY</div>
         </div>
 
         <div class="project-row">
@@ -410,23 +410,23 @@
 
         <div class="project-row">
           <div class="project-main">
-            <div class="project-name">KI-Agent in Unity</div>
+            <div class="project-name">Bachelorarbeit: Hybride KI-Systeme</div>
             <div class="project-desc">
-              LLM-gesteuertes NPC-Verhalten bzw. RL-Agent in einer Unity-Simulation —
-              die Verbindung aus Game-Dev-Hintergrund und KI Engineering.
+              Wissenschaftliche Arbeit zur Kombination klassischer Spiele-KI (State Machines,
+              Behavior Trees) mit generativen Sprachmodellen. Entwickelte Architektur, bei der
+              GPT-Antworten über Trigger-Wörter automatisch NPC-Zustandswechsel auslösen.
             </div>
           </div>
-          <div class="project-stack">Unity · C# · Python</div>
-          <div class="status planned">GEPLANT</div>
+          <div class="project-stack">C# · Unity<br>OpenAI API · Prompt Engineering</div>
+          <div class="status ready">READY</div>
         </div>
 
         <div class="project-row">
           <div class="project-main">
             <div class="project-name">Persönlicher Karriere-Chatbot</div>
             <div class="project-desc">
-              Ein Chatbot, der mit all meinen geschäftlichen Informationen — Lebenslauf,
-              Projekten, Erfahrungen — gefüttert ist und im Namen von mir Fragen dazu
-              beantwortet, z. B. für Recruiter oder auf dieser Portfolio-Seite.
+              Ein Chatbot, gefüttert mit meinen geschäftlichen Informationen (Lebenslauf,
+              Projekte, Erfahrungen), der stellvertretend Fragen beantwortet, z. B. für Recruiter.
             </div>
           </div>
           <div class="project-stack">Python · RAG<br>OpenAI API</div>
