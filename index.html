@@ -241,6 +241,19 @@
   .status.progress{color:var(--muted-on-ink);}
   .status.planned{color:var(--muted-on-ink);opacity:0.6;}
 
+  .project-row--live{grid-template-columns:1fr auto auto auto;}
+  .view-link{
+    font-family:'IBM Plex Mono',monospace;
+    font-size:11px;
+    padding:4px 9px;
+    border:1px solid var(--signal-dim);
+    color:var(--signal);
+    white-space:nowrap;
+    height:fit-content;
+    transition:background .15s ease,color .15s ease;
+  }
+  .project-row:hover .view-link{background:var(--signal);color:var(--ink);}
+
   /* ---------- SKILLS ---------- */
   .skill-groups{
     grid-column:2;
@@ -383,7 +396,7 @@
       <div></div>
       <div class="project-registry">
 
-        <a class="project-row" href="https://huggingface.co/spaces/paulglose25/rag-doc-assistent" target="_blank" rel="noopener">
+        <a class="project-row project-row--live" href="https://huggingface.co/spaces/paulglose25/rag-doc-assistent" target="_blank" rel="noopener">
           <div class="project-main">
             <div class="project-name">RAG-Dokumentenassistent</div>
             <div class="project-desc">
@@ -394,6 +407,7 @@
           </div>
           <div class="project-stack">Python · FastAPI · React<br>ChromaDB · OpenAI API</div>
           <div class="status ready">READY</div>
+          <div class="view-link">TESTEN ↗</div>
         </a>
 
         <div class="project-row">
